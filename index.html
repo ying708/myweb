@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>李欣穎的個人網站 | Personal Portfolio</title>
+    <!-- 引入 Google Fonts 提升字體質感 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* 全域樣式設定 */
+        :root {
+            --primary-color: #3182ce;
+            --primary-hover: #2b6cb0;
+            --bg-light: #f7fafc;
+            --text-dark: #2d3748;
+            --text-muted: #718096;
+            --card-bg: #ffffff;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', 'Poppins', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.7;
+            scroll-behavior: smooth;
+        }
+
+        /* 頂部導覽列 (Header & Nav) */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero 主頁區塊 */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 4rem 2rem;
+            background: linear-gradient(135deg, #ebf8ff 0%, #f7fafc 100%);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 750px;
+        }
+
+        .avatar-box {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #bee3f8 0%, #3182ce 100%);
+            margin: 0 auto 1.5rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: white;
+            box-shadow: var(--shadow-md);
+            border: 4px solid #ffffff;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1a202c;
+        }
+
+        .hero p.tagline {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero p.bio {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2.2rem;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(49, 130, 206, 0.35);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(49, 130, 206, 0.45);
+        }
+
+        /* 內容區塊通用樣式 */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            color: #1a202c;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-color);
+            display: block;
+            margin: 0.6rem auto 0 auto;
+            border-radius: 2px;
+        }
+
+        /* 關於我與家庭區塊 */
+        .about-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #edf2f7;
+        }
+
+        .about-card p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .family-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .family-card {
+            background-color: #f8fafc;
+            padding: 1.2rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .family-card h4 {
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.3rem;
+        }
+
+        .family-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        /* 學歷時間軸 (Timeline) */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background-color: #e2e8f0;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px;
+        }
+
+        .timeline-container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            right: -9px;
+            background-color: #ffffff;
+            border: 4px solid var(--primary-color);
+            top: 20px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+            text-align: right;
+        }
+
+        .right {
+            left: 50%;
+            text-align: left;
+        }
+
+        .right::after {
+            left: -9px;
+        }
+
+        .timeline-box {
+            padding: 1.5rem;
+            background-color: var(--card-bg);
+            position: relative;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #edf2f7;
+        }
+
+        .timeline-box h3 {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-bottom: 0.4rem;
+        }
+
+        .timeline-box p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* 興趣嗜好卡片區塊 */
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .interest-card {
+            background: var(--card-bg);
+            padding: 2.2rem 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #edf2f7;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .interest-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .interest-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .interest-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: #2d3748;
+        }
+
+        .interest-card p {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+        }
+
+        /* 未來目標區塊 */
+        .goal-banner {
+            background: linear-gradient(135deg, #3182ce 0%, #2b6cb0 100%);
+            color: #ffffff;
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .goal-banner h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .goal-banner p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* 頁尾 Footer */
+        footer {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: #1a202c;
+            color: #a0aec0;
+            font-size: 0.95rem;
+            margin-top: 4rem;
+        }
+
+        /* 響應式排版 (RWD) */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-container {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 20px;
+            }
+
+            .timeline-container::after {
+                left: 22px;
+            }
+
+            .left, .right {
+                text-align: left;
+                left: 0%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 導覽列 -->
+    <header>
+        <nav>
+            <div class="logo">李欣穎</div>
+            <ul class="nav-links">
+                <li><a href="#about">關於我</a></li>
+                <li><a href="#education">學歷背景</a></li>
+                <li><a href="#interests">興趣嗜好</a></li>
+                <li><a href="#goal">未來目標</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 主頁面 Banner -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="avatar-box">👩‍🎓</div>
+            <h1>李欣穎[cite: 1]</h1>
+            <p class="tagline">國立苑裡高中學生[cite: 1] ｜ 目標中原大學[cite: 1]</p>
+            <p class="bio">
+                大家好！我是李欣穎[cite: 1]，來自苗栗縣通霄鎮[cite: 1]。保持熱情、積極學習，朝著夢想一步步邁進！
+            </p>
+            <a href="#about" class="btn">深入瞭解我</a>
+        </div>
+    </section>
+
+    <!-- 關於我與家庭背景 Section -->
+    <section id="about">
+        <h2 class="section-title">關於我與家庭</h2>
+        <div class="about-card">
+            <p>
+                我出生於苗栗縣通霄鎮[cite: 1]，生長在一個溫馨且充滿支持的家庭，家中共有 5 位成員[cite: 1]：
+            </p>
+            <div class="family-grid">
+                <div class="family-card">
+                    <h4>阿嬤[cite: 1]</h4>
+                    <p>給予溫暖關懷的長輩</p>
+                </div>
+                <div class="family-card">
+                    <h4>爸爸[cite: 1]</h4>
+                    <p>任職於力冠鋁業[cite: 1]</p>
+                </div>
+                <div class="family-card">
+                    <h4>媽媽[cite: 1]</h4>
+                    <p>任職於京元電子[cite: 1]</p>
+                </div>
+                <div class="family-card">
+                    <h4>弟弟與我[cite: 1]</h4>
+                    <p>互相陪伴、共同成長</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 學歷歷程 Section -->
+    <section id="education">
+        <h2 class="section-title">學歷歷程</h2>
+        <div class="timeline">
+            <div class="timeline-container left">
+                <div class="timeline-box">
+                    <h3>國立苑裡高中[cite: 1]</h3>
+                    <p>目前就讀中[cite: 1]</p>
+                </div>
+            </div>
+            <div class="timeline-container right">
+                <div class="timeline-box">
+                    <h3>通霄國中[cite: 1]</h3>
+                    <p>畢業[cite: 1]</p>
+                </div>
+            </div>
+            <div class="timeline-container left">
+                <div class="timeline-box">
+                    <h3>通霄國小[cite: 1]</h3>
+                    <p>畢業[cite: 1]</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 興趣嗜好 Section -->
+    <section id="interests">
+        <h2 class="section-title">興趣與嗜好</h2>
+        <div class="interests-grid">
+            <div class="interest-card">
+                <div class="interest-icon">🎧</div>
+                <h3>聽音樂[cite: 1]</h3>
+                <p>在音樂的世界裡尋找專注與靈感，放鬆心靈[cite: 1]。</p>
+            </div>
+            <div class="interest-card">
+                <div class="interest-icon">🎤</div>
+                <h3>唱歌[cite: 1]</h3>
+                <p>熱愛透過歌聲表達情感，讓生活充滿豐富節奏[cite: 1]。</p>
+            </div>
+            <div class="interest-card">
+                <div class="interest-icon">🎬</div>
+                <h3>看短劇[cite: 1]</h3>
+                <p>喜愛欣賞各類創意的短劇作品，體會豐富多元的故事觀點[cite: 1]。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 未來目標 Section -->
+    <section id="goal">
+        <div class="goal-banner">
+            <h2>未來目標</h2>
+            <p>
+                我的目標是考取 <strong>中原大學</strong>[cite: 1]！希望能在這個充滿優良學風與充實資源的環境中深造學習，實踐未來的理想。
+            </p>
+        </div>
+    </section>
+
+    <!-- 頁尾 Footer -->
+    <footer>
+        <p>&copy; 2026 李欣穎 Li Hsin-Ying. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
